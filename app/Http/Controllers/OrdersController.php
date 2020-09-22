@@ -39,8 +39,7 @@ class OrdersController extends Controller
 			return Response()->json($validator->errors());
 		}
 
-		$ubah = Orders::where('id_orders', $id)->update
-		(
+		$ubah = Orders::where('id_orders', $id)->update(
 			[
 				'id_customers'   => $request->id_customers	 ,
 				'id_product'	 => $request->id_product	 ,

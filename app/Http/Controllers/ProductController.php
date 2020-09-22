@@ -36,13 +36,12 @@ class ProductController extends Controller
 			return Response()->json($validator->errors());
 		}
 
-		$ubah = Product::where('id_product', $id)->update
-		(
-			[
+		$ubah = Product::where('id_product', $id)->update([
+
 				'nama_product'  => $request->nama_product,
 				'jenis_product'	=> $request->jenis_product
-			]
-		);
+			
+			]);
 
 		if ($ubah) 
 		{

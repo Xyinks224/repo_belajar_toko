@@ -12,25 +12,27 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('/register', 'UserController@register');
+Route::post('/login', 'UserController@login');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::group(['middleware' => ['jwt.verify']], function() 
+	{    
+		Route::get('/customers', 'CustomersController@show');
+		Route::get('/customers/{id_customers}', 'CustomersController@detail');
+		Route::post('/customers', 'CustomersController@store');
+		Route::put('/customers/{id_customers}', 'CustomersController@update');
+		Route::delete('/customers/{id_customers}', 'CustomersController@destroy');
 
-Route::get('/customers', 'CustomersController@show');
-Route::get('/customers/{id_customers}', 'CustomersController@detail');
-Route::post('/customers', 'CustomersController@store');
-Route::put('/customers/{id_customers}', 'CustomersController@update');
-Route::delete('/customers/{id_customers}', 'CustomersController@destroy');
+		Route::get('/product', 'ProductController@show');
+		Route::get('/product/{id_product}', 'ProductController@detail');
+		Route::post('/product', 'ProductController@store');
+		Route::put('/product/{id_product}', 'ProductController@update');
+		Route::delete('/product/{id_product}', 'ProductController@destroy');
 
-Route::get('/product', 'ProductController@show');
-Route::get('/product/{id_product}', 'ProductController@detail');
-Route::post('/product', 'ProductController@store');
-Route::put('/product/{id_product}', 'ProductController@update');
-Route::delete('/product/{id_product}', 'ProductController@destroy');
-
-Route::get('/orders', 'OrdersController@show');
-Route::get('/orders/{id_orders}', 'OrdersController@detail');
-Route::post('/orders', 'OrdersController@store');
-Route::put('/orders/{id_orders}', 'OrdersController@update');
-Route::delete('/orders/{id_orders}', 'OrdersController@destroy');
+		Route::get('/orders', 'OrdersController@show');
+		Route::get('/orders/{id_orders}', 'OrdersController@detail');
+		Route::post('/orders', 'OrdersController@store');
+		Route::put('/orders/{id_orders}', 'OrdersController@update');
+		Route::delete('/orders/{id_orders}', 'OrdersController@destroy');
+	}
+);

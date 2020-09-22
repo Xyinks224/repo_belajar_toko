@@ -38,8 +38,7 @@ class CustomersController extends Controller
 			return Response()->json($validator->errors());
 		}
 
-		$ubah = Customers::where('id_customers', $id)->update
-		(
+		$ubah = Customers::where('id_customers', $id)->update(
 			[
 				'nama_customers' => $request->nama_customers ,
    		 		'tanggal_lahir'	 =>	$request->tanggal_lahir  ,
